@@ -10,7 +10,8 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 mongoose.connect('mongodb+srv://Admin-Ayush:Ayush2110@cluster0.xa1yn.mongodb.net/todolistDB', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 
