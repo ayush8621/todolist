@@ -50,7 +50,7 @@ app.get("/", function(req, res) {
   Item.find({}, function(err, items) {
     if (items.length === 0) {
       Item.insertMany(defaultitems, function(err) {});
-      setTimeout(function(){res.redirect("/")},10);
+      res.redirect("/");
     }
     else {
       res.render("list", {listtitle: "Today",addeditems: items});
@@ -67,14 +67,14 @@ app.post("/", function(req, res) {
     })
     if(listname === "Today" ){
       item5.save(function(err){
-      setTimeout(function(){res.redirect("/")},100);
+      res.redirect("/");
     });
     }
     else{
       Item2.findOne({name:listname},function(err,founditem){
         founditem.items.push(item5);
         founditem.save(function(err){
-          setTimeout(function(){res.redirect("/"+ listname);},100);
+        res.redirect("/"+ listname);
         });
       })
     }
@@ -90,7 +90,7 @@ app.get("/:anything",function(req,res){
         items:defaultitems
       });
       item4.save(function(err){
-        setTimeout(function(){res.redirect("/"+ anything);},100);
+        res.redirect("/"+ anything);
       });
 
     }
@@ -106,19 +106,19 @@ app.get("/:anything",function(req,res){
     const listname = req.body.listname;
     if(listname === "Today"){
       Item.findByIdAndRemove(id,function(err){});
-      setTimeout(function(){res.redirect("/");},100);
+      res.redirect("/");
     }
     else{
 Item2.findOneAndUpdate({name:listname},{$pull:{items:{_id:id}}},function(err,founditem){
-  setTimeout(function(){res.redirect("/"+ listname);},100);
+  res.redirect("/"+ listname);
 });
     }
   });
 
   let port = process.env.PORT;
-  // if (port == null || port == "") {
-  //   port = 3000;
-  // }
+  if (port == null || port == "") {
+    port = 3000;
+  }
 
   app.listen(port, function() {
     console.log("Server started succesfully");
