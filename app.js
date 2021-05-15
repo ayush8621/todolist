@@ -116,8 +116,8 @@ Item2.findOneAndUpdate({name:listname},{$pull:{items:{_id:id}}},function(err,fou
 
 
 
-app.listen(process.emv.PORT||3000, function(req, res) {
-  console.log("server is running on port 3000")
+app.listen(process.env.PORT||3000, function(req, res) {
+  console.log("server has Started")
 });
 
 
